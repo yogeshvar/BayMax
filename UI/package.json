@@ -19,7 +19,6 @@
     "gltfjsx": "^5.0.2",
     "lottie-react": "^2.4.0",
     "mic-recorder-to-mp3": "^2.2.2",
-    "openai": "^3.2.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-audio-voice-recorder": "^1.0.5",

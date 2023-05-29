@@ -40,7 +40,7 @@ const ChatWidget = () => {
   return (
     <>
       <Skeleton isLoaded={!isLoading}>
-        <Chat isOnline={isOnline} useOpenAI={false} />
+        <Chat isOnline={isOnline} />
         <Center m={5}>
           <Box>
             <Button

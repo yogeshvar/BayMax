@@ -19,12 +19,6 @@ import Messages from "../Components/Messages";
 import { ModelF2 } from "../Components/EmoTalker/F-Talk";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 
 // write class styles here
 export const disabledFlexClass = {
@@ -67,53 +61,17 @@ const ModelCanvas = ({ isTalk }) => {
   );
 };
 
-const Chat = ({ isOnline, useOpenAI }) => {
+const Chat = ({ isOnline }) => {
   const [messages, setMessages] = useState(offlineMessage);
   const [isTalk, setIsTalk] = useState(false);
   // eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const [prompts, setPrompts] = useState([
-    {
-      role: "system",
-      content: "You are an empathetic, positive and helpful therapist.",
-    },
-  ]);
   const [inputMessage, setInputMessage] = useState("");
 
   useEffect(() => {
     setMessages(isOnline ? welcomeMessage : offlineMessage);
   }, [isOnline]);
-
-  const generateResponse = async (prompts) => {
-    setIsTyping(true);
-    const data = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: prompts,
-      temperature: 0.8,
-    });
-    const response = await data.data;
-    setIsTyping(false);
-    setIsTalk(true);
-    return response;
-  };
-
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim().length) {
-      return;
-    }
-    const data = inputMessage;
-    setMessages((old) => [...old, { from: "me", text: data }]);
-    prompts.push({ role: "user", content: data });
-    setInputMessage("");
-    var response = await generateResponse(prompts);
-    setMessages((old) => [
-      ...old,
-      { from: "computer", text: response.choices[0].message.content },
-    ]);
-    setPrompts((old) => [...old, response.choices[0].message]);
-    setInputMessage("");
-  };
 
   const generateResponseModel = async (input) => {
     setIsTyping(true);
@@ -192,9 +150,7 @@ const Chat = ({ isOnline, useOpenAI }) => {
                 isOnline={isOnline}
                 inputMessage={inputMessage}
                 setInputMessage={setInputMessage}
-                handleSendMessage={
-                  useOpenAI ? handleSendMessage : handleSendMessageModel
-                }
+                handleSendMessage={handleSendMessageModel}
               />
             </Flex>
           </Flex>
