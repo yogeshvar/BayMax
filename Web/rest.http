@@ -1,0 +1,21 @@
+POST http://192.168.140.183:9000/v2 HTTP/1.1
+content-type: application/json
+
+{
+    "seeker": "My diet becomes fucked when i get depressed.. I can't control myself in the grocery store when I'm feeling down. Chips, cookies, soda, cake, you name It. Anyone else a stress eater?",
+    "response": "By any chance do you think you're in a loop. Junk food can make you depressed. And being depressed probably makes you eat more junk food? For a while that was my problem too."
+}
+
+###
+
+POST http://192.168.140.183:9000/v3 HTTP/1.1
+content-type: application/json
+
+{
+    "input": "I hope I did not lose my only two best friends. They are the only ones I could relaqte to"
+}
+
+
+###
+ 
+GET http://192.168.140.183:9000 HTTP/1.1

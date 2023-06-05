@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  web:
+    image: { image_name }
+    container_name: baymax-api
+    ports:
+      - "9000:9000"
+    networks:
+      - default
